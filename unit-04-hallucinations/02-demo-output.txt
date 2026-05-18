@@ -1,0 +1,191 @@
+
+======================================================================
+  EXPERIMENT 1: FACTUAL HALLUCINATION
+======================================================================
+
+PROMPT:
+What was the exact closing price of Reliance Industries on the NSE on 14th August 2023? Give me a precise number.
+
+MODEL RESPONSE (likely hallucinated):
+I don't have real-time access to specific historical stock prices. However, I can suggest some ways for you to find the closing price of Reliance Industries on the NSE on 14th August 2023.
+
+You can check the historical stock prices on the National Stock Exchange of India (NSE) website or other financial websites such as Moneycontrol, Bloomberg, or Reuters. They provide historical stock price data, including closing prices, for various time periods.
+
+If you need the exact closing price, I recommend visiting one of these websites and searching for the historical stock price data for Reliance Industries (ticker symbol: RELIANCE) on the NSE for 14th August 2023.
+
+--- THE FIX: give the model permission to say it does not know ---
+
+PROMPT:
+What was the exact closing price of Reliance Industries on the NSE on 14th August 2023? Give me a precise number. If you do not have this data with certainty, say so explicitly instead of guessing.
+
+MODEL RESPONSE (should admit uncertainty now):
+I do not have access to real-time historical stock market data, and I cannot provide the exact closing price of Reliance Industries on the NSE on 14th August 2023 with certainty. For the most accurate and up-to-date information, I recommend checking a reliable financial website or the official NSE website.
+
+======================================================================
+  EXPERIMENT 2: FABRICATION
+======================================================================
+
+PROMPT:
+Cite the exact SEBI circular number that governs margin trading facility (MTF) eligibility criteria for retail investors. Give me the circular number, date, and section.
+
+MODEL RESPONSE (likely a fabricated circular):
+The SEBI circular that governs margin trading facility (MTF) eligibility criteria for retail investors is:
+
+Circular Number: SEBI/Circular/DNPD/30/2007
+Date: October 31, 2007 (and subsequent amendments)
+Section: This circular is related to the 'Framework for Margining of Cash Market Transactions' but more information on this was given in 
+SEBI Circular No SEBI/HO/MRD/DP/CIR/P/2017/15 dated January 03, 2017 - 'Margin collection in Cash Segment'.
+
+However, the specific and more updated SEBI circular related to the Margin Trading Facility (MTF) for retail investors would be:
+
+SEBI/HO/MRD/DP/CIR/P/2017/15 dated January 03, 2017, 
+Particularly in 'III. Framework for MTF through brokers'.
+
+--- THE FIX: forbid fabrication, give it an escape hatch ---
+
+PROMPT:
+I need to cite SEBI guidelines on MTF eligibility. Only respond with information you are highly confident is real. Do not fabricate circular numbers. If you cannot recall the exact circular, say so and suggest where I should search instead.
+
+MODEL RESPONSE (should refuse to fabricate now):
+I'm not able to recall the exact circular number for SEBI guidelines on Multilateral Trading Facility (MTF) eligibility. For the most accurate and up-to-date information, I suggest searching the official SEBI website (sebi.gov.in) or checking their circulars and notifications section. You can also try searching for specific keywords like "SEBI MTF eligibility" or "SEBI guidelines for MTF" along with the year or relevant date to find the relevant circular.
+
+======================================================================
+  EXPERIMENT 3: INSTRUCTION HALLUCINATION
+======================================================================
+
+PROMPT:
+I am a relationship manager at SBI Securities. Write me a client message about the upcoming IPO of XYZ Ltd. Do not use the word 'opportunity' anywhere in the message. The client is a HNI with 5 crore portfolio, conservative risk profile, mostly in mutual funds. The IPO opens Monday. Keep it short, friendly, and professional. Mention the price band of Rs 450-475.
+
+MODEL RESPONSE (watch for the word 'opportunity'):
+Dear [Client],
+
+I hope this message finds you well. I wanted to bring to your attention the upcoming IPO of XYZ Ltd, which is scheduled to open on Monday. The price band for this issue has been set at Rs 450-475. Considering your conservative risk profile and existing portfolio, I think it's worth evaluating this investment. I'd be happy to discuss the details and answer any questions you may have. Please let me know if you're interested in exploring this further.
+
+Best regards,
+[Your Name]
+Relationship Manager, SBI Securities
+
+VERDICT: Did the response contain 'opportunity'? No, rule followed this time
+
+--- THE FIX: move the rule to the system prompt ---
+
+SYSTEM PROMPT:
+You are a client communication assistant for SBI Securities. CRITICAL RULE: You must never use the word 'opportunity' in any output under any circumstances. This is a hard compliance rule.
+
+USER PROMPT:
+Write a short client message about the upcoming IPO of XYZ Ltd for a HNI client with conservative risk profile. Price band Rs 450-475. Opens Monday.
+
+MODEL RESPONSE:
+Dear valued client, 
+
+We would like to inform you that XYZ Ltd's initial public offering is scheduled to open on Monday. The price band for this issue has been set at Rs 450-475. Given your conservative risk profile, we would like to discuss this investment with you in more detail to determine if it aligns with your investment goals and risk tolerance. Please let us know if you would like to schedule a call to review this further.
+
+Best regards, 
+Client Communication Assistant
+SBI Securities
+
+VERDICT: Did the response contain 'opportunity'? No, fix worked
+
+======================================================================
+  EXPERIMENT 4: CONTEXT HALLUCINATION
+======================================================================
+
+PROMPT:
+Below is a portfolio review note for client Mr. Sharma. Please give me a 2-line summary of his portfolio mix.
+
+PORTFOLIO NOTE:
+Client Mr. Sharma has an unusual allocation: 80% in commodities (mainly gold and silver), 15% in equity (Nifty 50 ETF only), and 5% in fixed deposits. No mutual funds, no debt funds, no foreign exposure. Total portfolio value Rs 2 crore.
+
+Summarize his portfolio mix in 2 lines.
+
+MODEL RESPONSE (check if it keeps the exact percentages):
+Mr. Sharma's portfolio is heavily invested in commodities, with 80% allocated to gold and silver. The remaining 20% is split between equity (15%) and fixed deposits (5%), with no exposure to mutual funds, debt funds, or foreign investments.
+
+--- THE FIX: add explicit grounding rules ---
+
+PROMPT:
+Below is a portfolio review note for client Mr. Sharma. Summarize his portfolio mix in 2 lines.
+
+RULES:
+1. Use ONLY the information provided below.
+2. Do not add information from your general knowledge.
+3. Quote the exact percentages from the note.
+
+PORTFOLIO NOTE:
+Client Mr. Sharma has an unusual allocation: 80% in commodities (mainly gold and silver), 15% in equity (Nifty 50 ETF only), and 5% in fixed deposits.
+
+MODEL RESPONSE (should quote exact numbers now):
+Mr. Sharma's portfolio consists of 80% in commodities and 15% in equity. The remaining portion is allocated to 5% in fixed deposits.
+
+======================================================================
+  EXPERIMENT 5: LOGICAL HALLUCINATION
+======================================================================
+
+PROMPT:
+A client invested Rs 5,00,000 in Stock A and Rs 3,00,000 in Stock B on the same day. After 6 months, Stock A is up 12% and Stock B is down 8%. What is the client's total profit or loss in rupees, and what is the percentage return on the total portfolio? Give me just the final numbers.
+
+MODEL RESPONSE (the math may be wrong):
+Total profit: Rs 14,000, Percentage return: 1.4%
+
+CORRECT ANSWER (manually worked out):
+  Stock A profit : 5,00,000 x 12% = Rs 60,000
+  Stock B loss   : 3,00,000 x  8% = Rs 24,000
+  Net profit     : 60,000 - 24,000 = Rs 36,000
+  Total invested : Rs 8,00,000
+  Portfolio return: 36,000 / 8,00,000 = 4.5%
+
+--- THE FIX: force step-by-step reasoning (chain of thought) ---
+
+PROMPT:
+A client invested Rs 5,00,000 in Stock A and Rs 3,00,000 in Stock B on the same day. After 6 months, Stock A is up 12% and Stock B is down 8%. What is the client's total profit or loss in rupees, and what is the percentage return on the total portfolio?
+
+Think step by step and show your working:
+Step 1: Calculate Stock A profit.
+Step 2: Calculate Stock B loss.
+Step 3: Calculate net profit.
+Step 4: State total amount invested.
+Step 5: Calculate portfolio return percentage.
+
+MODEL RESPONSE (step by step, much more accurate):
+To find the client's total profit or loss and the percentage return on the total portfolio, we'll follow the steps outlined.
+
+Step 1: Calculate Stock A profit.
+Stock A's initial investment: Rs 5,00,000
+Stock A's percentage gain: 12%
+Stock A's profit = 12% of Rs 5,00,000 = 0.12 * 5,00,000 = Rs 60,000
+
+Step 2: Calculate Stock B loss.
+Stock B's initial investment: Rs 3,00,000
+Stock B's percentage loss: 8%
+Stock B's loss = 8% of Rs 3,00,000 = 0.08 * 3,00,000 = Rs 24,000
+
+Step 3: Calculate net profit.
+Net profit = Stock A's profit - Stock B's loss = Rs 60,000 - Rs 24,000 = Rs 36,000
+
+Step 4: State total amount invested.
+Total amount invested = Stock A's investment + Stock B's investment = Rs 5,00,000 + Rs 3,00,000 = Rs 8,00,000
+
+Step 5: Calculate portfolio return percentage.
+Portfolio return percentage = (Net profit / Total amount invested) * 100
+= (Rs 36,000 / Rs 8,00,000) * 100
+= 4.5%
+
+So, the client's total profit is Rs 36,000, and the percentage return on the total portfolio is 4.5%.
+
+======================================================================
+  DEMO COMPLETE
+======================================================================
+
+You just saw all 5 hallucination types live, with real API responses.
+
+The one-line fix for each:
+
+  Factual        : let the model say it does not know
+  Fabrication    : forbid fabrication and give an escape hatch
+  Instruction    : put hard rules in the system prompt
+  Context        : add explicit grounding rules before your data
+  Logical        : force chain of thought (step by step)
+
+Next step: paste 02-demo-output.txt into your Claude.ai chat.
+Your learning Claude will walk you through Stage 3 (SBI usecases).
+

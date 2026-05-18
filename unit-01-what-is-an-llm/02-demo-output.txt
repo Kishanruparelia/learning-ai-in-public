@@ -1,0 +1,123 @@
+
+======================================================================
+  EXPERIMENT 1: CONTEXT NARROWING
+======================================================================
+
+We give the model the same sentence start three times.
+Each version adds more context. Watch how the completion narrows.
+
+STEM A (almost no context):
+  'The market opened'
+
+COMPLETION A:
+  with a surge in trading activity, driven by optimism about the latest economic indicators and corporate earnings reports.
+
+STEM B (some context added):
+  'The Indian stock market opened on budget day'
+
+COMPLETION B:
+  The Indian stock market opened on budget day with a significant surge, as investors reacted positively to the government's announcements and allocations outlined in the budget.
+
+STEM C (full context):
+  'The Indian stock market opened sharply lower on budget day after the finance minister announced a surprise capital gains tax hike'
+
+COMPLETION C:
+  that spooked investors and led to a massive selloff, with the benchmark indices plummeting to their lowest levels in several months.
+
+OBSERVATION:
+  Stem A could go anywhere. Stem B got more specific. Stem C
+  had almost only one natural continuation. The model did not
+  decide that. The context decided it. The model just followed.
+
+======================================================================
+  EXPERIMENT 2: SAME QUESTION, DIFFERENT FRAMING
+======================================================================
+
+Same question. Two completely different frames.
+The model does not change. The framing does.
+
+QUESTION (same both times):
+  'What is 2 + 2?'
+
+FRAME 1: Maths student
+  System prompt: 'You are a focused maths student preparing for an exam. You answer questions precisely and concisely. No metaphors.'
+
+RESPONSE:
+2 + 2 = 4.
+
+FRAME 2: Poet
+  System prompt: 'You are a romantic poet who sees numbers as emotions. Answer every question as if writing a short poem or verse.'
+
+RESPONSE:
+Two gentle whispers, side by side,
+Together merge, a harmonious tide.
+Their sum, a symphony so fine,
+Equals four, a love that's simply divine.
+
+OBSERVATION:
+  The model received identical input both times.
+  The system prompt is what changed. The output changed completely.
+  This is why system prompts are the most important part of any
+  production AI product. They are not a nice-to-have. They are
+  the product.
+
+======================================================================
+  EXPERIMENT 3: LIVE KNOWLEDGE TEST
+======================================================================
+
+We ask a question that needs real-time data.
+The model is frozen at its training cutoff. Let us see what it does.
+
+QUESTION:
+  What is the latest iPhone model available for purchase right now, and what does it cost in India today? Give me the exact model name and the exact rupee price.
+
+MODEL RESPONSE:
+The latest iPhone models available for purchase right now are iPhone 14 series. The prices in India may vary depending on the storage variant and the condition (new or refurbished). 
+
+As of my cut-off date (01 March 2023), the prices for the iPhone 14 series in India are as follows:
+
+- iPhone 14 (128GB): ₹79,900
+- iPhone 14 (256GB): ₹89,900
+- iPhone 14 (512GB): ₹109,900
+- iPhone 14 Plus (128GB): ₹89,900
+- iPhone 14 Plus (256GB): ₹99,900
+- iPhone 14 Plus (512GB): ₹119,900
+- iPhone 14 Pro (128GB): ₹129,900
+- iPhone 14 Pro (256GB): ₹139,900
+- iPhone 14 Pro (512GB): ₹159,900
+- iPhone 14 Pro (1TB): ₹179,900
+- iPhone 14 Pro Max (128GB): ₹139,900
+- iPhone 14 Pro Max (256GB): ₹149,900
+- iPhone 14 Pro Max (512GB): ₹169,900
+- iPhone 14 Pro Max (1TB): ₹189,900
+
+Please note that prices may have changed since my cut-off date. It's always best to check the prices with authorized Apple retailers or online marketplaces like Amazon or Flipkart for the most up-to-date pricing
+
+OBSERVATION:
+  Read the response carefully. Did the model:
+  (a) Admit its knowledge has a cutoff and it cannot be certain?
+  (b) Give you a confident answer as if it had live data?
+
+  If (b), that confidence is the problem. The model does not know
+  what it does not know. This is called the knowledge cutoff trap.
+  It is one of the most common failure modes in production AI.
+
+  The fix (Unit 5): connect the model to a live retrieval system
+  so it can look things up before answering. That is RAG.
+
+======================================================================
+  DEMO COMPLETE
+======================================================================
+
+Three experiments. Three core LLM behaviours, live.
+
+  Experiment 1: More context narrows the output. Vague in, vague out.
+  Experiment 2: Framing controls the model as much as the question does.
+  Experiment 3: The model is frozen in time. It does not know today.
+
+These three behaviours explain almost everything about why LLMs
+succeed or fail in real products. Keep them in mind for every unit
+that follows.
+
+Next: paste 02-demo-output.txt into your Claude.ai chat for Stage 3.
+

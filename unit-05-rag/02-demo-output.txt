@@ -1,0 +1,186 @@
+
+======================================================================
+  EXPERIMENT 1: NO RAG vs WITH RAG
+======================================================================
+
+Breezy is a fictional company. The model has never seen it.
+First we ask without any context. Then we inject the policy and ask again.
+Watch how dramatically the answer changes.
+
+
+--- PART A: No RAG (model answers from memory alone) ---
+
+QUESTION:
+  How many casual leaves does a full-time Breezy employee get per year, and can they be carried forward?
+
+MODEL RESPONSE (no context provided):
+I'm not aware of the specific policies of Breezy, as it seems to be a private company and I don't have real-time access to their internal policies. However, I can suggest some possible ways to find the answer:
+
+1. Check your employee handbook or contract: If you're a full-time Breezy employee, you can refer to your employee handbook or contract to see what it says about casual leaves.
+2. Contact HR: You can reach out to Breezy's HR department to ask about their leave policy, including the number of casual leaves you're entitled to per year and whether they can be carried forward.
+3. Check the company intranet: If Breezy has an internal website or intranet, you can check there for information on leave policies.
+
+I hope this helps, and please let me know if you have any further questions!
+
+--- PART B: With RAG (we inject the policy first) ---
+
+QUESTION (same as before):
+  How many casual leaves does a full-time Breezy employee get per year, and can they be carried forward?
+
+INJECTED CONTEXT (this is the RAG part):
+
+BREEZY INTERNAL HR POLICY DOCUMENT (Version 3.2, effective 01 April 2025)
+
+SECTION 4: LEAVE ENTITLEMENTS
+
+4.1 Casual Leave
+Full-time employees at Breezy are entitled to 12 casual leaves per calendar year.
+Casual leaves are credited on the first working day of January each year.
+Casual leaves cannot be carried forward to the next calendar year.
+Any unused casual leaves at the end of December are forfeited without compensation.
+
+4.2 Sick Leave
+Full-time employees are entitled to 10 sick leaves per calendar year.
+Sick leaves can be carried forward for a maximum of 2 years, up to a cap of 20 days total.
+Sick leave requires a medical certificate for absences longer than 2 consecutive days.
+
+4.3 Earned Leave
+Full-time employees accrue 1.5 earned leave days per month, totalling 18 per year.
+Earned leaves can be carried forward indefinitely, up to a maximum balance of 45 days.
+Earned leaves can be encashed at the time of resignation or retirement.
+
+MODEL RESPONSE (with context injected):
+A full-time Breezy employee is entitled to 12 casual leaves per calendar year. However, casual leaves cannot be carried forward to the next calendar year. Any unused casual leaves at the end of December are forfeited without compensation.
+
+OBSERVATION:
+  The model did not get smarter. The prompt got richer.
+  RAG is not magic. It is a pattern: retrieve relevant text,
+  inject it into the prompt, then ask the question.
+  The model just reads what you give it and summarises.
+
+======================================================================
+  EXPERIMENT 2: A TINY RAG SYSTEM FROM SCRATCH
+======================================================================
+
+We build a small RAG pipeline with 3 moving parts:
+  1. A knowledge base (10 FAQ chunks about NoteStack)
+  2. A retrieval function (keyword search to find the top 2 chunks)
+  3. A generation step (LLM answers using only the retrieved chunks)
+
+We run 3 different questions through this full pipeline.
+Every step is printed so you can see the machine working.
+
+Running 3 questions through the RAG pipeline...
+
+
+--- QUESTION 1 ---
+
+QUESTION:
+  How much does NoteStack Pro cost?
+
+RETRIEVAL STEP (top 2 chunks found):
+  Chunk 1 [faq-01]: NoteStack is a collaborative note-taking app for teams. It lets you create, shar...
+  Chunk 2 [faq-02]: NoteStack pricing: The Free plan supports up to 3 users and 100 notes. The Pro p...
+
+GENERATED ANSWER:
+NoteStack Pro costs Rs 499 per user per month. (Source: faq-02)
+
+
+--- QUESTION 2 ---
+
+QUESTION:
+  Can I use NoteStack without internet?
+
+RETRIEVAL STEP (top 2 chunks found):
+  Chunk 1 [faq-01]: NoteStack is a collaborative note-taking app for teams. It lets you create, shar...
+  Chunk 2 [faq-02]: NoteStack pricing: The Free plan supports up to 3 users and 100 notes. The Pro p...
+
+GENERATED ANSWER:
+The provided information does not mention whether NoteStack can be used without internet. (Source: faq-01, faq-02)
+
+
+--- QUESTION 3 ---
+
+QUESTION:
+  Does NoteStack connect with Slack?
+
+RETRIEVAL STEP (top 2 chunks found):
+  Chunk 1 [faq-01]: NoteStack is a collaborative note-taking app for teams. It lets you create, shar...
+  Chunk 2 [faq-06]: NoteStack integrates with Slack, Google Drive, and Notion. Integrations are only...
+
+GENERATED ANSWER:
+Yes, NoteStack connects with Slack, but this integration is only available on the Pro and Enterprise plans. (Source: faq-06)
+
+OBSERVATION:
+  Each question triggered a different retrieval. The model only
+  saw the 2 chunks relevant to that question, not all 10.
+  This is why RAG scales. You do not dump your entire knowledge
+  base into every prompt. You fetch only what is needed.
+
+======================================================================
+  EXPERIMENT 3: RAG WITH A WRONG KNOWLEDGE BASE
+======================================================================
+
+What happens when the retrieved context is outdated or wrong?
+The model trusts whatever you inject. Let us see the failure, then the fix.
+
+
+--- PART A: RAG with outdated knowledge base (no warning) ---
+
+The knowledge base has wrong pricing. The model will answer
+confidently from the wrong chunk. No caveat. No flag.
+
+QUESTION:
+  What is the price of NoteStack Pro?
+
+RETRIEVAL STEP (top 2 chunks found):
+  Chunk 1 [faq-01]: NoteStack is a collaborative note-taking app for teams. It lets you create, shar...
+  Chunk 2 [faq-02-OUTDATED]: NoteStack pricing: The Free plan supports up to 3 users and 100 notes. The Pro p...
+
+GENERATED ANSWER:
+The price of NoteStack Pro is Rs 499 per user per month. (Source: faq-02)
+
+
+--- PART B: Same RAG, but with a system prompt warning ---
+
+Same outdated KB. But now the system prompt tells the model to flag
+anything that might be stale. Watch what changes.
+
+QUESTION:
+  What is the price of NoteStack Pro?
+
+RETRIEVAL STEP (top 2 chunks found):
+  Chunk 1 [faq-01]: NoteStack is a collaborative note-taking app for teams. It lets you create, shar...
+  Chunk 2 [faq-02-OUTDATED]: NoteStack pricing: The Free plan supports up to 3 users and 100 notes. The Pro p...
+
+GENERATED ANSWER:
+The price of NoteStack Pro is mentioned as Rs 499 per user per month. Please note that this information may be outdated, and it's recommended to verify the current pricing on the official website. 
+(Source: faq-02-OUTDATED)
+
+OBSERVATION:
+  The retrieved chunk was wrong both times. Rs 499 is outdated.
+  Part A: the model presented it as fact. No caveat.
+  Part B: the model answered but told the user to verify.
+
+  The lesson: RAG quality depends on knowledge base freshness.
+  A staleness warning in the system prompt is a safety net,
+  not a solution. The real fix is keeping your KB up to date
+  and adding a 'last updated' timestamp to every chunk.
+
+======================================================================
+  DEMO COMPLETE
+======================================================================
+
+Three experiments. Three layers of RAG understanding.
+
+  Experiment 1: RAG is inject and answer. No magic. Just richer prompts.
+  Experiment 2: Retrieval is the hard part. Generation is the easy part.
+  Experiment 3: Wrong KB gives confident wrong answers. Freshness matters.
+
+The RAG pattern is the foundation of almost every enterprise AI usecase
+in the SBI roadmap. Portfolio Intelligence, Research Co-Pilot, Customer
+Service Hub all need it. The question is always the same: where does
+the knowledge come from, and how fresh is it?
+
+Next: paste 02-demo-output.txt into your Claude.ai chat for Stage 3.
+

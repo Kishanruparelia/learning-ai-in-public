@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Stack: Units 1 to 7</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #fff;
+    font-family: 'Courier New', monospace;
+    padding: 40px 24px;
+    color: #111;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .node {
+    width: 100%;
+    max-width: 560px;
+    border: 1.5px solid #111;
+    padding: 16px 24px;
+    position: relative;
+    background: #fff;
+  }
+
+  .node-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+  }
+
+  .node-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 10px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border: 1px solid #ddd;
+    color: #555;
+    background: #fafafa;
+  }
+
+  .tag.key {
+    border-color: #111;
+    color: #111;
+    background: #fff;
+    font-weight: bold;
+  }
+
+  .arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+    gap: 1px;
+  }
+
+  .arrow-line {
+    width: 1.5px;
+    height: 20px;
+    background: #111;
+  }
+
+  .arrow-label {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #bbb;
+    padding: 2px 0;
+  }
+
+  .arrow-head {
+    font-size: 14px;
+    line-height: 1;
+    color: #111;
+    margin-top: -4px;
+  }
+
+  .rag-block {
+    width: 100%;
+    max-width: 560px;
+    border: 1.5px solid #111;
+    border-top: none;
+  }
+
+  .rag-title {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    padding: 8px 24px 0;
+  }
+
+  .rag-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 12px 24px 16px;
+    gap: 0;
+  }
+
+  .rag-node {
+    border: 1px solid #bbb;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .rag-node-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  .rag-node-tags {
+    font-size: 10px;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  .rag-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 8px;
+    gap: 2px;
+  }
+
+  .rag-arrow-line {
+    height: 1.5px;
+    width: 40px;
+    background: #999;
+  }
+
+  .rag-arrow-label {
+    font-size: 8px;
+    color: #bbb;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .rag-arrow-head {
+    font-size: 12px;
+    color: #999;
+    margin-left: -4px;
+    align-self: flex-end;
+    margin-top: -8px;
+  }
+
+  .bottom {
+    max-width: 560px;
+    width: 100%;
+    margin-top: 32px;
+    border-top: 1.5px solid #111;
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rule {
+    font-size: 11px;
+    color: #999;
+  }
+
+  .rule span {
+    color: #111;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>AI Stack: Units 1 to 7</h1>
+
+  <div class="stack">
+
+    <!-- UNIT 1 -->
+    <div class="node">
+      <div class="node-label">Unit 01</div>
+      <div class="node-title">LLM</div>
+      <div class="tags">
+        <span class="tag key">next word predictor</span>
+        <span class="tag">not a search engine</span>
+        <span class="tag">not a database</span>
+        <span class="tag">frozen in time</span>
+        <span class="tag key">more context = better output</span>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">measured in</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head">▼</div>
+    </div>
+
+    <!-- UNIT 2 -->
+    <div class="node">
+      <div class="node-label">Unit 02</div>
+      <div class="node-title">Tokens</div>
+      <div class="tags">
+        <span class="tag key">~0.75 words each</span>
+        <span class="tag">input + output both cost</span>
+        <span class="tag key">context window = bathtub</span>
+        <span class="tag">overflow = forget</span>
+        <span class="tag">$3 per 1M tokens</span>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">controlled by</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head">▼</div>
+    </div>
+
+    <!-- UNIT 3 -->
+    <div class="node">
+      <div class="node-label">Unit 03</div>
+      <div class="node-title">Prompting</div>
+      <div class="tags">
+        <span class="tag key">RC TF EC</span>
+        <span class="tag">Role</span>
+        <span class="tag">Context</span>
+        <span class="tag">Task</span>
+        <span class="tag">Format</span>
+        <span class="tag">Examples</span>
+        <span class="tag">Constraints</span>
+        <span class="tag key">system prompt = the product</span>
+        <span class="tag">zero-shot vs few-shot</span>
+        <span class="tag">garbage in = garbage out</span>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">breaks as</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head">▼</div>
+    </div>
+
+    <!-- UNIT 4 -->
+    <div class="node">
+      <div class="node-label">Unit 04</div>
+      <div class="node-title">Hallucinations</div>
+      <div class="tags">
+        <span class="tag key">FFCIL</span>
+        <span class="tag">Factual → RAG</span>
+        <span class="tag">Fabrication → citations</span>
+        <span class="tag">Instruction → system prompt</span>
+        <span class="tag">Context → grounding</span>
+        <span class="tag">Logical → chain of thought</span>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-label">factual fix is</div>
+      <div class="arrow-line"></div>
+      <div class="arrow-head">▼</div>
+    </div>
+
+    <!-- UNITS 5 6 7 RAG BLOCK -->
+    <div class="rag-block">
+      <div class="rag-title">Units 05 + 06 + 07: The RAG Stack</div>
+      <div class="rag-inner">
+
+        <!-- EMBEDDING MODEL -->
+        <div class="rag-node">
+          <div class="rag-node-title">Embedding Model</div>
+          <div class="rag-node-tags">
+            text → numbers<br>
+            same model always<br>
+            multilingual matters
+          </div>
+        </div>
+
+        <div class="rag-arrow">
+          <div class="rag-arrow-label">vectors</div>
+          <div style="display:flex;align-items:center;">
+            <div class="rag-arrow-line"></div>
+            <span style="font-size:12px;color:#999;">▶</span>
+          </div>
+          <div class="rag-arrow-label">stored</div>
+        </div>
+
+        <!-- VECTOR DB -->
+        <div class="rag-node">
+          <div class="rag-node-title">Vector DB</div>
+          <div class="rag-node-tags">
+            meaning = distance<br>
+            chunk 200-500 words<br>
+            pgvector / Chroma<br>
+            cosine similarity
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SECOND ROW -->
+      <div style="display:flex;justify-content:center;padding:0 24px 8px;gap:8px;flex-wrap:wrap;border-top:1px solid #eee;padding-top:12px;margin:0 0 16px;">
+        <span class="tag key">retrieve → inject → generate → cite</span>
+        <span class="tag">KB freshness = output quality</span>
+        <span class="tag">RAG beats fine-tuning for live data</span>
+      </div>
+
+      <!-- LLM ROW -->
+      <div style="border-top:1px solid #eee;padding:12px 24px 16px;display:flex;align-items:center;gap:16px;">
+        <div style="font-size:11px;color:#999;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;">then</div>
+        <div class="rag-node" style="flex:1;text-align:left;padding:10px 16px;">
+          <div class="rag-node-title">LLM (Unit 01)</div>
+          <div class="rag-node-tags">reads retrieved chunks → generates answer → returns with citations</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM RULES -->
+    <div class="bottom">
+      <div class="rule"><span>Unit 05</span> RAG = retrieve inject generate cite</div>
+      <div class="rule"><span>Unit 06</span> meaning matches not words</div>
+      <div class="rule"><span>Unit 07</span> chunk first then embed</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
