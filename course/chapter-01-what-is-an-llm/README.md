@@ -1,4 +1,4 @@
-# Lesson 1: What is an LLM
+# Chapter 1: What is an LLM
 
 **Time needed:** 1 hour
 **You will need:** A laptop, an internet connection, no coding experience
@@ -50,7 +50,7 @@ This is the most important mental shift in the whole course.
 
 The LLM does not have a database it looks up. It generates text that statistically fits the pattern of what came before.
 
-Usually the pattern matches the truth. Sometimes it does not. That gap is where AI makes things up. We will fix this in Lesson 4.
+Usually the pattern matches the truth. Sometimes it does not. That gap is where AI makes things up. We will fix this in Chapter 4.
 
 ### 4. Same question, different answer
 
@@ -94,7 +94,7 @@ Open `try-it-yourself.md` in this folder. Do not skip it. Reading without doing 
 
 ## Going deeper (optional)
 
-If you want to understand what is actually happening under the hood, open `deep-dive.md`. Not required to move to Lesson 2.
+If you want to understand what is actually happening under the hood, open `deep-dive.md`. Not required to move to Chapter 2.
 
 ---
 

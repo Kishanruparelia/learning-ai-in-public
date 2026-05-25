@@ -1,4 +1,4 @@
-# Lesson 1 Test
+# Chapter 1 Test
 
 Answer these in your own words. No looking back at the lesson. Answers are at the bottom, hidden. Do not scroll until you have written your answers.
 
@@ -29,6 +29,6 @@ You ask an LLM the same question twice and get two different answers. What is th
 
 ---
 
-If you got all three right, move to Lesson 2: Tokens.
+If you got all three right, move to Chapter 2: Tokens.
 
 If you got any wrong, reread the section in `README.md` that covers it. Then move on.

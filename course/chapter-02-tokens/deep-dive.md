@@ -55,7 +55,7 @@ Some applications handle this by:
 2. Storing important facts in a database and re-injecting them into the prompt when relevant
 3. Asking the user to start a new conversation
 
-This is one of the core engineering challenges in building AI products with long conversations. We cover it in Lesson 5 (RAG).
+This is one of the core engineering challenges in building AI products with long conversations. We cover it in Chapter 5 (RAG).
 
 ---
 

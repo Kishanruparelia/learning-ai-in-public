@@ -1,4 +1,4 @@
-# Try it yourself: Lesson 2
+# Try it yourself: Chapter 2
 
 Three practicals. 30 minutes total. Do them in order.
 
@@ -134,7 +134,7 @@ Run it. The AI now has no idea. It will either say it does not know or make some
 
 ---
 
-## What to show me before moving to Lesson 3
+## What to show me before moving to Chapter 3
 
 1. A screenshot of Tiktokenizer showing your own name tokenised
 2. A one-line answer to: "Why did the AI forget the city when you did not pass the history?"

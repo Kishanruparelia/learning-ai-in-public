@@ -1,4 +1,4 @@
-# Try it yourself: Lesson 1
+# Try it yourself: Chapter 1
 
 Three practicals. 30 minutes total. Do them in order.
 
@@ -115,7 +115,7 @@ Change the prompt inside the quotes to:
 What did I have for breakfast today?
 ```
 
-Press Shift + Enter again. Watch what happens. The model might guess, might refuse, might make something up. This is the foundation of Lesson 4 (Hallucinations).
+Press Shift + Enter again. Watch what happens. The model might guess, might refuse, might make something up. This is the foundation of Chapter 4 (Hallucinations).
 
 Now add `temperature=0` to the call, like this:
 
@@ -136,7 +136,7 @@ Now change `temperature=0` to `temperature=1.5` and run three times. Notice it g
 
 ---
 
-## What to show me before moving to Lesson 2
+## What to show me before moving to Chapter 2
 
 1. A screenshot of your Colab notebook showing the rainbow explanation
 2. A one-line answer to: "Why did temperature 0 give the same output every time?"
