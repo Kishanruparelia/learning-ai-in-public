@@ -79,13 +79,21 @@ You are now inside your new project folder on your Desktop. Every script you wri
 
 ---
 
-Now check if Python is installed. Type:
+Now check if Python is installed.
 
+**On Mac**, type:
+```
+python3 --version
+```
+
+**On Windows**, type:
 ```
 python --version
 ```
 
 If you see a version number like `Python 3.11.5`, you are good. Skip to Step 3.
+
+**Mac note:** Mac does not recognise the command `python`. It only recognises `python3`. This is normal, not an error. Use `python3` for every command in this course.
 
 If you see an error or "command not found", install Python:
 
@@ -113,17 +121,16 @@ cd ~/Desktop/learning-ai-with-kishan
 cd %USERPROFILE%\Desktop\learning-ai-with-kishan
 ```
 
-Check the version again:
-
-```
-python --version
-```
-
-You should now see a version number. On Mac, the command is `python3` not `python`. Use whichever one works for the rest of the lesson and stick with it.
+Check the version again using the right command for your system (Mac: `python3 --version`, Windows: `python --version`). You should now see a version number.
 
 ### Step 3: Install the Groq library (1 min)
 
-In terminal:
+**On Mac**, type:
+```
+pip3 install groq
+```
+
+**On Windows**, type:
 ```
 pip install groq
 ```
@@ -156,6 +163,13 @@ Save the file as `my-first-ai.py`.
 ### Step 5: Run it (1 min)
 
 In terminal, navigate to wherever you saved the file. Then type:
+
+**On Mac:**
+```
+python3 my-first-ai.py
+```
+
+**On Windows:**
 ```
 python my-first-ai.py
 ```
