@@ -148,4 +148,18 @@ Planned unit order, subject to change based on Kishu's needs at SBI:
 
 ---
 
+## The /course folder
+
+A separate non-technical, hour-paced course track lives at `/course/`. It is written for complete beginners (no coding background). Each lesson has 4 files: README, try-it-yourself, deep-dive (optional), test.
+
+### Course progress
+
+**Lesson 1: What is an LLM** — DONE. Files live at `course/lesson-01-what-is-an-llm/`.
+- Step 2 updated twice: replaced Homebrew with python.org .pkg installer after Homebrew caused install failures.
+- Reader is currently on Practical 3, Step 2 (installing Python via python.org).
+
+**Lesson 2: Tokens** — PENDING. Tiktokenizer link goes in the practical section.
+
+---
+
 End of context file.
