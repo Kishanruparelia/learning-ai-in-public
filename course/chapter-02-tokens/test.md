@@ -1,4 +1,4 @@
-# Lesson 2 Test
+# Chapter 2 Test
 
 Answer in your own words. No looking back. Answers at the bottom. Do not scroll until you are done.
 
@@ -33,6 +33,6 @@ A user reports that your chatbot "forgot" something they told it 2 hours ago in 
 
 ---
 
-If you got all three right, move to Lesson 3: Prompting.
+If you got all three right, move to Chapter 3: Prompting.
 
 If you got Q2 wrong, reread the cost section in README.md. The estimation skill matters when you are building real products.

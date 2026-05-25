@@ -1,7 +1,7 @@
-# Lesson 2: Tokens
+# Chapter 2: Tokens
 
 **Time needed:** 1 hour
-**You will need:** A browser, the Groq API key from Lesson 1
+**You will need:** A browser, the Groq API key from Chapter 1
 
 ---
 
@@ -20,7 +20,7 @@ Every LLM thinks in tokens, not words.
 
 Before your message even reaches the model, it gets chopped into small pieces. Those pieces are tokens. The model reads tokens, thinks in tokens, and replies in tokens.
 
-If you do not understand tokens, you will be confused when the AI cuts off mid-sentence, forgets what you said earlier, or your bill is higher than expected. This lesson fixes all of that.
+If you do not understand tokens, you will be confused when the AI cuts off mid-sentence, forgets what you said earlier, or your bill is higher than expected. This chapter fixes all of that.
 
 ---
 
@@ -124,4 +124,4 @@ Open `deep-dive.md` to understand how the tokenizer vocabulary was built and why
 
 ## Check yourself
 
-Open `test.md` before moving to Lesson 3.
+Open `test.md` before moving to Chapter 3.
