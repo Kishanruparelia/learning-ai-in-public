@@ -41,111 +41,56 @@ Now you understand why two people asking the same AI the same question get diffe
 
 This is where most courses lose people. We are not going to lose you.
 
-You will write 10 lines of code, run them, and get a real AI response. That is it.
+No installs. No terminal. Everything runs in your browser using Google Colab, a free tool from Google. All you need is a Google account.
 
 ### Step 1: Get a free API key (3 min)
 
 1. Go to console.groq.com
-2. Sign up with Google (no credit card)
-3. Click "API Keys" on the left
+2. Sign in with Google (no credit card needed)
+3. Click "API Keys" on the left sidebar
 4. Click "Create API Key"
-5. Copy the key. Save it in a notepad. You will need it in 2 minutes.
+5. Give it any name, like "my-first-key"
+6. Copy the key. It looks like a long string of random letters. Save it in a notepad for now.
 
-### Step 2: Set up your project folder and Python (5 min)
+### Step 2: Open Google Colab (1 min)
 
-First, let us create a folder where all your AI course work will live.
+1. Go to colab.research.google.com
+2. Sign in with your Google account
+3. Click "New notebook" in the top left
 
-**On Mac:**
+You will see a blank page with an empty box. That box is called a cell. It is where you write and run code.
 
-Open Terminal. Type these commands one at a time:
+### Step 3: Save your API key safely (2 min)
 
-```
-cd ~/Desktop
-mkdir learning-ai-with-kishan
-cd learning-ai-with-kishan
-```
+You should never paste your API key directly into code. If you share the notebook, anyone can see it and use your key.
 
-**On Windows:**
+Colab has a built-in safe place for keys called Secrets.
 
-Open Command Prompt. Type these commands one at a time:
+1. On the left sidebar, click the key icon (it looks like a small key)
+2. Click "Add new secret"
+3. In the Name field, type: `GROQ_API_KEY`
+4. In the Value field, paste the key you copied in Step 1
+5. Toggle the switch to on so this notebook can access it
+6. Click the X to close the panel
 
-```
-cd %USERPROFILE%\Desktop
-mkdir learning-ai-with-kishan
-cd learning-ai-with-kishan
-```
+Your key is now stored safely. The code will read it from there, not from the visible cell.
 
-You are now inside your new project folder on your Desktop. Every script you write in this course goes here.
+### Step 4: Install Groq and run your first AI call (5 min)
 
----
-
-Now check if Python is installed.
-
-**On Mac**, type:
-```
-python3 --version
-```
-
-**On Windows**, type:
-```
-python --version
-```
-
-If you see a version number like `Python 3.11.5`, you are good. Skip to Step 3.
-
-**Mac note:** Mac does not recognise the command `python`. It only recognises `python3`. This is normal, not an error. Use `python3` for every command in this course.
-
-If you see an error or "command not found", install Python:
-
-**On Mac:**
-
-Go to python.org/downloads in your browser. Click the big yellow Download button. Open the `.pkg` file and click through the installer. That is it.
-
-**On Windows:**
-
-Go to python.org/downloads. Download the latest Python installer. Run it.
-
-**Important:** on the first screen of the installer, tick the box that says **"Add Python to PATH"** before clicking Install. If you miss this, nothing else will work.
-
----
-
-After installing, close your Terminal or Command Prompt completely. Open a new one. Navigate back to your folder:
-
-**On Mac:**
-```
-cd ~/Desktop/learning-ai-with-kishan
-```
-
-**On Windows:**
-```
-cd %USERPROFILE%\Desktop\learning-ai-with-kishan
-```
-
-Check the version again using the right command for your system (Mac: `python3 --version`, Windows: `python --version`). You should now see a version number.
-
-### Step 3: Install the Groq library (1 min)
-
-**On Mac**, type:
-```
-pip3 install groq
-```
-
-**On Windows**, type:
-```
-pip install groq
-```
-
-Wait for it to finish.
-
-### Step 4: Write your first AI script (5 min)
-
-Open any text editor (Notepad, TextEdit, VS Code, anything). Paste this:
+Click inside the empty cell. Paste this entire block:
 
 ```python
+# Install the Groq library (only needed once per session)
+!pip install groq -q
+
+# Import the library and the tool that reads your secret key
 from groq import Groq
+from google.colab import userdata
 
-client = Groq(api_key="PASTE-YOUR-KEY-HERE")
+# Create a connection to the Groq API using your saved key
+client = Groq(api_key=userdata.get("GROQ_API_KEY"))
 
+# Send a message to the AI and store the response
 response = client.chat.completions.create(
     model="llama-3.3-70b-versatile",
     messages=[
@@ -153,41 +98,26 @@ response = client.chat.completions.create(
     ]
 )
 
+# Print what the AI said
 print(response.choices[0].message.content)
 ```
 
-Replace `PASTE-YOUR-KEY-HERE` with the API key you copied in Step 1. Keep the quotes.
+Now press **Shift + Enter** to run it. Wait about 5 seconds.
 
-Save the file as `my-first-ai.py`.
+You should see an explanation of rainbows appear below the cell.
 
-### Step 5: Run it (1 min)
+**Congratulations. You just called an LLM from your browser.**
 
-In terminal, navigate to wherever you saved the file. Then type:
+### Step 5: Break it on purpose (5 min)
 
-**On Mac:**
-```
-python3 my-first-ai.py
-```
-
-**On Windows:**
-```
-python my-first-ai.py
-```
-
-Wait one second. You should see an explanation of rainbows printed in your terminal.
-
-**Congratulations. You just called an LLM from your own computer.**
-
-### Step 6: Break it on purpose (5 min)
-
-Change the prompt to something the model would not know:
+Change the prompt inside the quotes to:
 ```
 What did I have for breakfast today?
 ```
 
-Run it. Watch what happens. The model might guess, might refuse, might make something up. This is the foundation of Lesson 4 (Hallucinations).
+Press Shift + Enter again. Watch what happens. The model might guess, might refuse, might make something up. This is the foundation of Lesson 4 (Hallucinations).
 
-Now change `temperature=0` by editing the call:
+Now add `temperature=0` to the call, like this:
 
 ```python
 response = client.chat.completions.create(
@@ -197,15 +127,16 @@ response = client.chat.completions.create(
         {"role": "user", "content": "Write a 2-line poem about Monday morning"}
     ]
 )
+print(response.choices[0].message.content)
 ```
 
-Run it three times. Notice the output is now identical every time. Temperature 0 means "always pick the most likely next word, no randomness".
+Run it three times by pressing Shift + Enter three times. Notice the output is identical every time. Temperature 0 means "always pick the most likely next word, no randomness".
 
-Now set `temperature=1.5` and run three times. Notice it gets weirder, more creative, sometimes nonsense.
+Now change `temperature=0` to `temperature=1.5` and run three times. Notice it gets weirder, more creative, sometimes nonsense.
 
 ---
 
 ## What to show me before moving to Lesson 2
 
-1. A screenshot of your terminal showing the rainbow explanation
+1. A screenshot of your Colab notebook showing the rainbow explanation
 2. A one-line answer to: "Why did temperature 0 give the same output every time?"
