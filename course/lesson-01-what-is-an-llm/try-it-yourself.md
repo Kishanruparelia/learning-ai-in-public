@@ -51,16 +51,85 @@ You will write 10 lines of code, run them, and get a real AI response. That is i
 4. Click "Create API Key"
 5. Copy the key. Save it in a notepad. You will need it in 2 minutes.
 
-### Step 2: Install Python (skip if already installed)
+### Step 2: Set up your project folder and Python (5 min)
 
-Open Terminal (Mac) or Command Prompt (Windows). Type:
+First, let us create a folder where all your AI course work will live.
+
+**On Mac:**
+
+Open Terminal. Type these commands one at a time:
+
+```
+cd ~/Desktop
+mkdir learning-ai-with-kishan
+cd learning-ai-with-kishan
+```
+
+**On Windows:**
+
+Open Command Prompt. Type these commands one at a time:
+
+```
+cd %USERPROFILE%\Desktop
+mkdir learning-ai-with-kishan
+cd learning-ai-with-kishan
+```
+
+You are now inside your new project folder on your Desktop. Every script you write in this course goes here.
+
+---
+
+Now check if Python is installed. Type:
+
 ```
 python --version
 ```
 
 If you see a version number like `Python 3.11.5`, you are good. Skip to Step 3.
 
-If you see an error, install Python from python.org. Download, install, restart terminal.
+If you see an error or "command not found", install Python:
+
+**On Mac:**
+
+Install Homebrew first if you do not have it. Paste this in Terminal:
+
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Then install Python:
+
+```
+brew install python
+```
+
+**On Windows:**
+
+Go to python.org/downloads. Download the latest Python installer. Run it.
+
+**Important:** on the first screen of the installer, tick the box that says **"Add Python to PATH"** before clicking Install. If you miss this, nothing else will work.
+
+---
+
+After installing, close your Terminal or Command Prompt completely. Open a new one. Navigate back to your folder:
+
+**On Mac:**
+```
+cd ~/Desktop/learning-ai-with-kishan
+```
+
+**On Windows:**
+```
+cd %USERPROFILE%\Desktop\learning-ai-with-kishan
+```
+
+Check the version again:
+
+```
+python --version
+```
+
+You should now see a version number. If you still see an error on Windows, try `python3 --version` instead. Use whichever one works for the rest of the lesson.
 
 ### Step 3: Install the Groq library (1 min)
 
