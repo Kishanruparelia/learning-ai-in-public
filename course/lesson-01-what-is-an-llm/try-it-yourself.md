@@ -91,17 +91,7 @@ If you see an error or "command not found", install Python:
 
 **On Mac:**
 
-Install Homebrew first if you do not have it. Paste this in Terminal:
-
-```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Then install Python:
-
-```
-brew install python
-```
+Go to python.org/downloads in your browser. Click the big yellow Download button. Open the `.pkg` file and click through the installer. That is it.
 
 **On Windows:**
 
@@ -129,7 +119,7 @@ Check the version again:
 python --version
 ```
 
-You should now see a version number. If you still see an error on Windows, try `python3 --version` instead. Use whichever one works for the rest of the lesson.
+You should now see a version number. On Mac, the command is `python3` not `python`. Use whichever one works for the rest of the lesson and stick with it.
 
 ### Step 3: Install the Groq library (1 min)
 
